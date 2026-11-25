@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DINO SHOP - 100 ROLL</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background-color: #090d10;
+      color: #f1f5f9;
+      background-image: radial-gradient(circle at top center, #112a1c 0%, #090d10 65%);
+    }
+    .neon-border {
+      box-shadow: 0 0 15px rgba(57, 255, 20, 0.25);
+      border: 1px solid rgba(57, 255, 20, 0.4);
+    }
+    .neon-text {
+      text-shadow: 0 0 10px rgba(57, 255, 20, 0.6);
+    }
+    @keyframes marquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    .animate-marquee {
+      display: inline-block;
+      white-space: nowrap;
+      animation: marquee 18s linear infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen relative overflow-x-hidden">
+
+  <!-- THANH MENU TRÊN CÙNG -->
+  <header class="sticky top-0 z-40 bg-[#0d1318]/90 backdrop-blur-md border-b border-lime-500/20">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-2">
+      <a href="#" class="flex items-center gap-3 shrink-0">
+        <img src="images/logo.png" alt="Dino Shop" class="h-10 w-10 rounded-xl object-cover border border-lime-400/50" />
+        <div>
+          <span class="text-lg md:text-xl font-extrabold tracking-wide text-lime-400 neon-text">DINO SHOP</span>
+          <p class="text-[11px] text-slate-400 -mt-1 hidden sm:block">Uy Tín - Nhanh Chóng - Chất</p>
+        </div>
+      </a>
+
+      <div class="flex items-center gap-2 sm:gap-2.5">
+        <button onclick="openHistoryModal()" class="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs sm:text-sm px-3 py-2 rounded-xl border border-slate-700 transition cursor-pointer">
+          <i class="fa-solid fa-clock-rotate-left text-lime-400"></i>
+          <span class="hidden md:inline">Đã Mua</span>
+          <span id="order-count" class="bg-lime-500/20 text-lime-400 text-xs px-1.5 py-0.5 rounded-md font-bold">0</span>
+        </button>
+
+        <button onclick="openDepositModal()" class="flex items-center gap-1.5 bg-lime-500 hover:bg-lime-400 text-slate-950 font-bold text-xs sm:text-sm px-3 py-2 rounded-xl transition cursor-pointer">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Nạp Tiền</span>
+        </button>
+
+        <div id="auth-area" class="flex items-center gap-2"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NỘI DUNG CHÍNH -->
+  <main class="max-w-7xl mx-auto px-4 pt-6 pb-20">
+    <!-- Banner -->
+    <div class="relative rounded-2xl overflow-hidden neon-border bg-gradient-to-r from-[#0e1f14] via-[#132e1c] to-[#0a1410] p-6 md:p-9 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="z-10 max-w-xl space-y-3.5">
+        <span class="inline-block bg-lime-500/20 text-lime-400 border border-lime-400/40 text-xs font-bold px-3 py-1 rounded-full">
+          ⚡ DINO SHOP
+        </span>
+        <h1 class="text-3xl md:text-5xl font-black text-white leading-tight">
+          DINO <span class="text-lime-400 neon-text">SHOP</span>
+        </h1>
+        <p class="text-slate-300 text-sm md:text-base">
+          Bấm vào ô <strong class="text-lime-400">100 ROLL</strong> bên dưới để xem danh sách sản phẩm và chỉnh sửa.
+        </p>
+        <div class="flex flex-wrap gap-3 pt-1">
+          <button onclick="openRoll100Modal()" class="bg-lime-500 hover:bg-lime-400 text-slate-950 font-extrabold px-6 py-2.5 rounded-xl transition cursor-pointer">
+            Mở 100 ROLL
+          </button>
+          <button onclick="openDepositModal()" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold px-6 py-2.5 rounded-xl border border-slate-600 transition cursor-pointer">
+            Nạp Tiền Vào Ví
+          </button>
+        </div>
+      </div>
+
+      <div class="z-10">
+        <img src="images/logo.png" alt="Dino Mascot" class="w-56 md:w-64 rounded-2xl shadow-2xl border-2 border-lime-400/40" />
+      </div>
+    </div>
+
+    <!-- Chữ chạy -->
+    <div class="mt-5 bg-gradient-to-r from-lime-950 via-lime-800/60 to-lime-950 border border-lime-500/40 rounded-full py-2 px-4 overflow-hidden">
+      <div class="animate-marquee text-sm font-semibold text-lime-300">
+        ✦ DINO SHOP — Uy Tín - Nhanh Chóng - Chất — Bấm vào 100 ROLL để xem danh sách sản phẩm ✦
+      </div>
+    </div>
+
+    <!-- DANH MỤC -->
+    <section class="mt-9">
+      <div class="flex items-center justify-between gap-3 mb-5">
+        <div class="flex items-center gap-2.5">
+          <span class="w-1.5 h-6 bg-lime-400 rounded-full"></span>
+          <h2 class="text-xl font-extrabold text-white">Danh Mục</h2>
+        </div>
+        <span id="role-hint" class="text-xs text-slate-400 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-full"></span>
+      </div>
+
+      <div class="max-w-sm">
+        <div onclick="openRoll100Modal()"
+             class="bg-[#121a21] hover:bg-[#17232d] border-2 border-lime-400/70 hover:border-lime-400 rounded-2xl p-6 flex items-center justify-between gap-4 cursor-pointer transition group shadow-lg">
+          <div class="flex items-center gap-4">
+            <img src="images/logo.png" alt="100 ROLL" class="w-14 h-14 rounded-xl object-cover border border-lime-400/50 group-hover:scale-105 transition" />
+            <div>
+              <p class="text-2xl font-black text-lime-400 neon-text tracking-wide">100 ROLL</p>
+              <p class="text-xs text-lime-400 font-semibold mt-0.5">
+                Genshin Impact • Còn lại: <strong id="outer-acc-count" class="text-lime-300">0</strong> acc
+              </p>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right text-lime-400 text-lg group-hover:translate-x-1 transition"></i>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL BÊN TRONG 100 ROLL -->
+  <div id="roll100-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-3 sm:p-4">
+    <div class="bg-[#111920] border border-lime-500/40 rounded-2xl max-w-5xl w-full p-5 sm:p-6 space-y-4 max-h-[92vh] flex flex-col">
+
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <span class="bg-lime-500 text-slate-950 text-xs font-black px-2.5 py-1 rounded-md">100 ROLL</span>
+          <h3 class="text-lg sm:text-xl font-extrabold text-white">Danh Sách Sản Phẩm</h3>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="admin-add-btn" onclick="openProductForm()"
+            class="hidden bg-lime-500 hover:bg-lime-400 text-slate-950 font-extrabold text-xs px-3.5 py-2 rounded-xl transition cursor-pointer">
+            <i class="fa-solid fa-plus mr-1"></i> Thêm Sản Phẩm
+          </button>
+          <button onclick="closeModal('roll100-modal')" class="text-slate-400 hover:text-white p-1 cursor-pointer">
+            <i class="fa-solid fa-xmark text-xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-auto pr-1 flex-1"></div>
+    </div>
+  </div>
+
+  <!-- MODAL THÊM / SỬA SẢN PHẨM -->
+  <div id="product-form-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] hidden items-center justify-center p-4">
+    <div class="bg-[#111920] border border-lime-500/50 rounded-2xl max-w-md w-full p-6 space-y-4">
+      <div class="flex justify-between items-center">
+        <h3 id="product-form-title" class="text-lg font-extrabold text-lime-400">Thêm Sản Phẩm</h3>
+        <button onclick="closeModal('product-form-modal')" class="text-slate-400 hover:text-white cursor-pointer">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleSaveProduct(event)" class="space-y-3.5">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="text-xs text-slate-400 block mb-1">Mã số acc</label>
+            <input id="prod-code" type="text" required placeholder="VD: 10001"
+              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-sm text-amber-300 font-bold focus:outline-none focus:border-lime-400" />
+          </div>
+          <div>
+            <label class="text-xs text-slate-400 block mb-1">Tên sản phẩm</label>
+            <input id="prod-name" type="text" required placeholder="VD: Main nam"
+              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-lime-400" />
+          </div>
+        </div>
+
+        <div>
+          <label class="text-xs text-slate-400 block mb-1">Giá bán (VNĐ)</label>
+          <input id="prod-price" type="number" min="0" step="1000" required
+            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-lime-400" />
+        </div>
+
+        <div class="grid grid-cols-3 gap-2.5 pt-1">
+          <div>
+            <label class="text-[11px] text-amber-300 font-semibold flex items-center gap-1 mb-1">
+              <img src="images/primogem.jpg" class="w-4 h-4 object-contain rounded-full mix-blend-lighten" />
+              <span>Nguyên thạch</span>
+            </label>
+            <input id="prod-primo" type="text" required placeholder="~16.000"
+              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-2 text-xs sm:text-sm text-amber-300 font-bold focus:outline-none focus:border-amber-400" />
+          </div>
+          <div>
+            <label class="text-[11px] text-pink-300 font-semibold flex items-center gap-1 mb-1">
+              <img src="images/pink-fate.jpg" class="w-4 h-4 object-contain rounded-full mix-blend-lighten" />
+              <span>Roll hồng</span>
+            </label>
+            <input id="prod-pink" type="number" min="0" required
+              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-2 text-xs sm:text-sm text-pink-300 font-bold focus:outline-none focus:border-pink-400" />
+          </div>
+          <div>
+            <label class="text-[11px] text-sky-300 font-semibold flex items-center gap-1 mb-1">
+              <img src="images/blue-fate.jpg" class="w-4 h-4 object-contain rounded-full mix-blend-lighten" />
+              <span>Roll xanh</span>
+            </label>
+            <input id="prod-blue" type="number" min="0" required
+              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-2 text-xs sm:text-sm text-sky-300 font-bold focus:outline-none focus:border-sky-400" />
+          </div>
+        </div>
+
+        <div class="flex gap-2.5 pt-2">
+          <button type="button" onclick="closeModal('product-form-modal')" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2.5 rounded-xl transition cursor-pointer">
+            Hủy
+          </button>
+          <button type="submit" class="flex-1 bg-lime-500 hover:bg-lime-400 text-slate-950 font-extrabold py-2.5 rounded-xl transition cursor-pointer">
+            Lưu Sản Phẩm
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL ĐĂNG NHẬP / ĐĂNG KÝ -->
+  <div id="auth-modal" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-[#111920] border border-lime-500/40 rounded-2xl max-w-md w-full p-6 space-y-5">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center gap-2.5">
+          <img src="images/logo.png" alt="Dino" class="w-9 h-9 rounded-xl object-cover border border-lime-400/50" />
+          <div>
+            <h3 id="auth-modal-title" class="text-lg font-extrabold text-lime-400">Đăng Nhập</h3>
+            <p class="text-[11px] text-slate-400">Tài khoản Khách hoặc Admin (ShopDino / admin)</p>
+          </div>
+        </div>
+        <button onclick="closeModal('auth-modal')" class="text-slate-400 hover:text-white cursor-pointer">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-2 bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs font-bold">
+        <button id="tab-login" onclick="switchAuthTab('login')" class="py-2 rounded-lg bg-lime-500 text-slate-950 transition cursor-pointer">
+          Đăng Nhập
+        </button>
+        <button id="tab-register" onclick="switchAuthTab('register')" class="py-2 rounded-lg text-slate-400 hover:text-white transition cursor-pointer">
+          Đăng Ký
+        </button>
+      </div>
+
+      <form id="login-form" onsubmit="handleLogin(event)" class="space-y-3.5">
+        <div>
+          <label class="text-xs text-slate-400 block mb-1">Tên đăng nhập</label>
+          <div class="relative">
+            <i class="fa-solid fa-user text-slate-500 text-xs absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+            <input id="login-username" type="text" required placeholder="Nhập tên tài khoản"
+              class="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-lime-400" />
+          </div>
+        </div>
+        <div>
+          <label class="text-xs text-slate-400 block mb-1">Mật khẩu</label>
+          <div class="relative">
+            <i class="fa-solid fa-lock text-slate-500 text-xs absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+            <input id="login-password" type="password" required placeholder="••••••••"
+              class="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-10 py-2.5 text-sm text-white focus:outline-none focus:border-lime-400" />
+            <button type="button" onclick="togglePassword('login-password', 'eye-login')" title="Hiện/Ẩn mật khẩu"
+              class="text-slate-400 hover:text-lime-400 text-xs absolute right-3 top-1/2 -translate-y-1/2 p-1 cursor-pointer">
+              <i id="eye-login" class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <label class="flex items-center gap-2 text-xs text-slate-300 select-none cursor-pointer pt-0.5">
+          <input id="remember-account" type="checkbox" checked
+            class="w-4 h-4 rounded accent-lime-500 bg-slate-900 border-slate-700 cursor-pointer" />
+          <span>Ghi nhớ tài khoản</span>
+        </label>
+
+        <p id="auth-error" class="text-xs text-rose-400 hidden"></p>
+        <button type="submit" class="w-full bg-lime-500 hover:bg-lime-400 text-slate-950 font-extrabold py-3 rounded-xl transition cursor-pointer">
+          Vào Tài Khoản
+        </button>
+      </form>
+
+      <form id="register-form" onsubmit="handleRegister(event)" class="space-y-3.5 hidden">
+        <div>
+          <label class="text-xs text-slate-400 block mb-1">Tên đăng nhập</label>
+          <input id="reg-username" type="text" required minlength="3" placeholder="Ví dụ: ShopDino hoặc khach01"
+            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-lime-400" />
+        </div>
+        <div>
+          <label class="text-xs text-slate-400 block mb-1">Mật khẩu (tối thiểu 4 ký tự)</label>
+          <input id="reg-password" type="password" required minlength="4" placeholder="Tạo mật khẩu"
+            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-lime-400" />
+        </div>
+        <div>
+          <label class="text-xs text-slate-400 block mb-1">Nhập lại mật khẩu</label>
+          <input id="reg-confirm" type="password" required minlength="4" placeholder="Nhập lại mật khẩu"
+            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-lime-400" />
+        </div>
+        <p id="reg-error" class="text-xs text-rose-400 hidden"></p>
+        <button type="submit" class="w-full bg-lime-500 hover:bg-lime-400 text-slate-950 font-extrabold py-3 rounded-xl transition cursor-pointer">
+          Tạo Tài Khoản Mới
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL NẠP TIỀN CHUYỂN KHOẢN NGÂN HÀNG -->
+  <div id="deposit-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-3 sm:p-4">
+    <div class="bg-[#111920] border border-lime-500/40 rounded-2xl max-w-2xl w-full p-5 sm:p-6 space-y-4 max-h-[92vh] overflow-y-auto">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <h3 class="text-lg sm:text-xl font-extrabold text-lime-400">
+          <i class="fa-solid fa-building-columns mr-2"></i> Nạp tiền qua chuyển khoản ngân hàng
+        </h3>
+        <button onclick="closeModal('deposit-modal')" class="text-slate-400 hover:text-white p-1 cursor-pointer">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+
+      <div class="space-y-2.5">
+        <label class="text-xs font-semibold text-slate-300 block">Số tiền muốn nạp</label>
+        <div class="relative">
+          <input id="deposit-amount-input" type="number" min="0" step="1000" oninput="onDepositAmountChange()"
+            placeholder="Nhập số tiền (không bắt buộc)"
+            class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-3.5 pr-8 py-2.5 text-sm text-white font-bold focus:outline-none focus:border-lime-400" />
+          <span class="text-slate-400 text-sm font-bold absolute right-3.5 top-1/2 -translate-y-1/2">đ</span>
+        </div>
+
+        <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
+          <button type="button" onclick="selectDepositPreset(10000)" class="bg-slate-900 hover:bg-lime-500/20 border border-slate-700 hover:border-lime-400 text-xs font-bold text-slate-200 py-2 rounded-lg transition cursor-pointer">10.000 đ</button>
+          <button type="button" onclick="selectDepositPreset(20000)" class="bg-slate-900 hover:bg-lime-500/20 border border-slate-700 hover:border-lime-400 text-xs font-bold text-slate-200 py-2 rounded-lg transition cursor-pointer">20.000 đ</button>
+          <button type="button" onclick="selectDepositPreset(50000)" class="bg-slate-900 hover:bg-lime-500/20 border border-slate-700 hover:border-lime-400 text-xs font-bold text-slate-200 py-2 rounded-lg transition cursor-pointer">50.000 đ</button>
+          <button type="button" onclick="selectDepositPreset(100000)" class="bg-slate-900 hover:bg-lime-500/20 border border-slate-700 hover:border-lime-400 text-xs font-bold text-slate-200 py-2 rounded-lg transition cursor-pointer">100.000 đ</button>
+          <button type="button" onclick="selectDepositPreset(200000)" class="bg-slate-900 hover:bg-lime-500/20 border border-slate-700 hover:border-lime-400 text-xs font-bold text-slate-200 py-2 rounded-lg transition cursor-pointer">200.000 đ</button>
+          <button type="button" onclick="selectDepositPreset(500000)" class="bg-slate-900 hover:bg-lime-500/20 border border-slate-700 hover:border-lime-400 text-xs font-bold text-slate-200 py-2 rounded-lg transition cursor-pointer">500.000 đ</button>
+        </div>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden border border-lime-500/30 bg-[#15202a]">
+        <div class="bg-gradient-to-r from-amber-500 to-lime-400 text-slate-950 font-black px-4 py-2.5 flex items-center justify-between text-sm">
+          <span>Ngân hàng</span>
+          <span id="bank-display-name">VietinBank</span>
+        </div>
+
+        <div class="p-4 grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+          <div class="sm:col-span-7 space-y-3">
+            <div>
+              <p class="text-[11px] text-slate-400">Chủ tài khoản</p>
+              <p id="bank-owner-name" class="text-sm font-extrabold text-white">NGUYEN ANH VU</p>
+            </div>
+
+            <div>
+              <p class="text-[11px] text-slate-400">Số tài khoản</p>
+              <div class="flex items-center gap-2 mt-0.5">
+                <span id="bank-account-number" class="text-sm font-black text-lime-400 tracking-wide">101882763366</span>
+                <button type="button" onclick="copyText('bank-account-number')" class="bg-amber-400 hover:bg-amber-300 text-slate-950 text-[11px] font-extrabold px-2.5 py-1 rounded-md transition cursor-pointer">
+                  <i class="fa-regular fa-copy mr-1"></i> Copy
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <p class="text-[11px] text-slate-400">Nội dung chuyển khoản</p>
+              <div class="flex items-center gap-2 mt-1">
+                <input id="bank-memo-text" type="text" readonly
+                  class="flex-1 bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-xs font-extrabold text-amber-300 focus:outline-none" />
+                <button type="button" onclick="copyMemo()" class="bg-slate-800 hover:bg-slate-700 text-lime-400 border border-slate-600 px-2.5 py-1.5 rounded-lg text-xs transition cursor-pointer" title="Copy nội dung">
+                  <i class="fa-regular fa-copy"></i>
+                </button>
+              </div>
+              <p class="text-[11px] text-amber-400 mt-1 flex items-center gap-1">
+                <i class="fa-regular fa-clock"></i> Vui lòng nhập đúng nội dung chuyển khoản
+              </p>
+            </div>
+          </div>
+
+          <div class="sm:col-span-5 flex flex-col items-center justify-center bg-slate-950/60 border border-slate-800/80 rounded-xl p-2">
+            <img id="vietqr-image" src="images/qr-dino.jpg" alt="Mã QR chuyển khoản"
+              class="w-full max-w-[240px] sm:max-w-none h-56 sm:h-60 object-cover rounded-xl" />
+            <p class="text-[11px] text-slate-400 mt-2">Quét mã QR để chuyển tiền</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-400 space-y-1">
+        <p><i class="fa-solid fa-circle-info text-slate-500 mr-1"></i> Vui lòng nhập chính xác nội dung chuyển khoản để hệ thống dễ xác nhận giao dịch.</p>
+        <p><i class="fa-solid fa-circle-info text-slate-500 mr-1"></i> Nếu gửi đúng STK và nội dung mà chưa nhận được tiền, hãy liên hệ DINO SHOP để được hỗ trợ.</p>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-800">
+        <button type="button" onclick="resetBalance()" class="text-xs text-rose-400 hover:text-rose-300 cursor-pointer">
+          Reset số dư về 0đ
+        </button>
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="closeModal('deposit-modal')" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold px-4 py-2.5 rounded-xl transition cursor-pointer">
+            Đóng
+          </button>
+          <button type="button" onclick="confirmTestDeposit()" class="bg-lime-500 hover:bg-lime-400 text-slate-950 text-xs font-extrabold px-4 py-2.5 rounded-xl transition cursor-pointer">
+            Xác Nhận Nạp (Test Ví)
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL LỊCH SỬ MUA -->
+  <div id="history-modal" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-[#111920] border border-lime-500/40 rounded-2xl max-w-lg w-full p-6 space-y-4 max-h-[85vh] flex flex-col">
+      <div class="flex justify-between items-center">
+        <h3 class="text-lg font-bold text-lime-400"><i class="fa-solid fa-clock-rotate-left mr-1.5"></i> Lịch Sử Mua</h3>
+        <button onclick="closeModal('history-modal')" class="text-slate-400 hover:text-white cursor-pointer">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+      <div id="history-list" class="space-y-2.5 overflow-y-auto pr-1 flex-1 text-sm"></div>
+      <button onclick="clearHistory()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold py-2.5 rounded-xl border border-slate-700 transition cursor-pointer">
+        Xóa lịch sử
+      </button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
